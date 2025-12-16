@@ -15,7 +15,7 @@ Next.js 16 App Router with TypeScript, Tailwind CSS 4, and local storage
 
 ### Development
 ```bash
-cd /Users/jmbeh/Builder_Lab/Nutty_Baseball
+cd /Users/jmbeh/Personal Builder Lab/Nutty_Baseball
 npm run dev          # Start dev server on http://localhost:3000
 npm run build        # Production build
 npm run lint         # Run ESLint
