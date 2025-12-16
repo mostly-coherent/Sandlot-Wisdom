@@ -99,9 +99,13 @@ See `CLAUDE.md` for detailed development commands, project structure, and techni
 
 ## 💭 The Story Behind This
 
-My 10-year-old son got really into baseball through Peanuts comics and signed up for Little League. Problem: I knew nothing about baseball. This app is my journey from "What's a strike?" to actually understanding (and enjoying!) the game. If you're in the same boat, welcome aboard! 🚤⚾
+My son's love for Peanuts comics inspired him to explore baseball, so the Peanuts theme wasn't just decoration—it reframed "I don't know baseball" from embarrassing to endearing. Adults relax when the UI winks at their confusion. Built as a web app with zero backend—local storage only. I wanted zero friction for parents who feel behind their kids. (Also learned way more about Charlie Brown than expected.)
+
+## What's Next
+
+I'm working on **ambient listening for backyard games**—automatically tracking scores by listening to our natural conversation. The challenge: phone mics pick up everything, and game-relevant talk ("that's a strike!") gets mixed with regular conversation. Same audio recognition complexity as Allegro, but now I need to filter signal from noise in real-time.
 
 ---
 
-**Status:** In Development  
+**Status:** Active Development (Constant Work in Progress)  
 **Purpose:** Personal learning and portfolio project
