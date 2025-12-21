@@ -4,6 +4,8 @@
 
 **Your fun, Peanuts-themed companion for learning baseball alongside your kids.** Interactive lessons, game tracking, and Charlie Brown–approved commentary when you're losing to your 10-year-old in the backyard.
 
+![Nutty Baseball Homepage](e2e-results/01-homepage.png)
+
 ---
 
 ## 🚀 See It Running
