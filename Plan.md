@@ -1,4 +1,4 @@
-# Sandlot_Wisdom - Plan
+# Sandlot-Wisdom - Plan
 
 > **Purpose:** Requirements, research, and planning document
 > - Problem statement and user needs

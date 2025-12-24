@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Nutty Baseball E2E Tests', () => {
+test.describe('Sandlot Wisdom E2E Tests', () => {
   
   test('01 - Homepage loads', async ({ page }) => {
     await page.goto('/');

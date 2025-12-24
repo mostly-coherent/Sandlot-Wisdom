@@ -43,7 +43,7 @@ export default function LoginPage() {
         <div className="text-center mb-6 sm:mb-8">
           <div className="text-5xl sm:text-6xl mb-3 sm:mb-4" role="img" aria-label="Baseball emoji">⚾</div>
           <h1 className="text-2xl sm:text-3xl font-bold text-amber-800">
-            Nutty Baseball
+            Sandlot Wisdom
           </h1>
           <p className="text-amber-700 mt-2 text-sm sm:text-base">
             Enter the password to play ball!

@@ -84,3 +84,8 @@ export const getCurrentGame = (): Game | null => {
   }
 };
 
+export const clearGames = (): void => {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(GAMES_KEY);
+};
+

@@ -1,10 +1,12 @@
 # 🧢 Sandlot Wisdom
 
-> **Your backyard companion for learning baseball alongside your kids.** Interactive lessons, game tracking, and timeless baseball wisdom for parents and players alike.
+> Your backyard companion for learning baseball alongside your kids. Interactive lessons, game tracking, and timeless baseball wisdom for parents and players alike.
 
 ![Type](https://img.shields.io/badge/Type-App-blue)
 ![Status](https://img.shields.io/badge/Status-Active%20Dev-green)
 ![Stack](https://img.shields.io/badge/Stack-Next.js%2015%20%7C%20TypeScript%20%7C%20Tailwind-blue)
+
+![Sandlot Wisdom Homepage](e2e-results/01-homepage.png)
 
 ## 🚀 Quick Start
 
