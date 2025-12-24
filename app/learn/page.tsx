@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useTheme } from '../lib/themes';
 
 type Difficulty = 'beginner' | 'intermediate' | 'advanced';
 
@@ -153,6 +154,7 @@ const lessons: Lesson[] = [
 ];
 
 export default function LearnPage() {
+  const { theme } = useTheme();
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | 'all'>('all');
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
@@ -160,7 +162,7 @@ export default function LearnPage() {
   // Load completed lessons from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('nutty-baseball-completed-lessons');
+      const saved = localStorage.getItem('sandlot-wisdom-completed-lessons');
       if (saved) {
         try {
           setCompletedLessons(new Set(JSON.parse(saved)));
@@ -178,9 +180,8 @@ export default function LearnPage() {
   const handleCompleteLesson = (lessonId: string) => {
     const updated = new Set([...completedLessons, lessonId]);
     setCompletedLessons(updated);
-    // Save to localStorage
     if (typeof window !== 'undefined') {
-      localStorage.setItem('nutty-baseball-completed-lessons', JSON.stringify([...updated]));
+      localStorage.setItem('sandlot-wisdom-completed-lessons', JSON.stringify([...updated]));
     }
   };
 
@@ -193,19 +194,19 @@ export default function LearnPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-200 via-grass/20 to-dirt/30">
+    <div className="min-h-screen pb-12">
       {/* Header */}
-      <header className="bg-primary text-white shadow-lg">
+      <header className={`${theme.colors.primary} text-white ${theme.styles.shadow} transition-colors duration-500`}>
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Link 
               href="/" 
-              className="text-2xl hover:text-secondary transition-colors"
+              className="text-2xl hover:opacity-80 transition-opacity font-bold"
               aria-label="Back to home page"
             >
               <span aria-hidden="true">←</span> Back
             </Link>
-            <h1 className="text-4xl font-bold">
+            <h1 className={`text-4xl font-bold flex items-center gap-3 ${theme.styles.fontHeader}`}>
               <span aria-hidden="true">📚</span> Learn Baseball
             </h1>
             <div className="w-24" aria-hidden="true"></div>
@@ -217,16 +218,16 @@ export default function LearnPage() {
         {!selectedLesson ? (
           <>
             {/* Difficulty Filter */}
-            <section aria-labelledby="difficulty-heading" className="bg-white rounded-lg shadow-lg p-6 mb-6">
-              <h2 id="difficulty-heading" className="text-xl font-bold mb-4">Choose Your Level:</h2>
+            <section aria-labelledby="difficulty-heading" className={`${theme.colors.cardBg} backdrop-blur-sm rounded-lg shadow-lg p-6 mb-8 border-2 ${theme.colors.cardBorder}`}>
+              <h2 id="difficulty-heading" className={`text-xl font-bold mb-4 opacity-90 ${theme.styles.fontHeader}`}>Choose Your Level:</h2>
               <div className="flex flex-wrap gap-3" role="group" aria-label="Filter by difficulty level">
                 <button
                   onClick={() => setSelectedDifficulty('all')}
                   aria-pressed={selectedDifficulty === 'all'}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                  className={`px-6 py-3 rounded-lg font-bold transition-all border-2 border-transparent ${
                     selectedDifficulty === 'all' 
-                      ? 'bg-blue-500 text-white shadow-lg scale-105' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? `${theme.colors.buttonPrimary} shadow-lg scale-105` 
+                      : 'bg-white/50 hover:bg-white/80'
                   }`}
                 >
                   All Lessons
@@ -234,10 +235,10 @@ export default function LearnPage() {
                 <button
                   onClick={() => setSelectedDifficulty('beginner')}
                   aria-pressed={selectedDifficulty === 'beginner'}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                  className={`px-6 py-3 rounded-lg font-bold transition-all border-2 ${
                     selectedDifficulty === 'beginner' 
-                      ? 'bg-green-500 text-white shadow-lg scale-105' 
-                      : 'bg-green-100 text-green-800 hover:bg-green-200'
+                      ? 'bg-green-500 text-white border-green-600 shadow-lg scale-105' 
+                      : 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
                   }`}
                 >
                   <span aria-hidden="true">🌱</span> Beginner
@@ -245,10 +246,10 @@ export default function LearnPage() {
                 <button
                   onClick={() => setSelectedDifficulty('intermediate')}
                   aria-pressed={selectedDifficulty === 'intermediate'}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                  className={`px-6 py-3 rounded-lg font-bold transition-all border-2 ${
                     selectedDifficulty === 'intermediate' 
-                      ? 'bg-yellow-500 text-white shadow-lg scale-105' 
-                      : 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200'
+                      ? 'bg-yellow-500 text-white border-yellow-600 shadow-lg scale-105' 
+                      : 'bg-yellow-50 text-yellow-700 border-yellow-200 hover:bg-yellow-100'
                   }`}
                 >
                   <span aria-hidden="true">⭐</span> Intermediate
@@ -256,10 +257,10 @@ export default function LearnPage() {
                 <button
                   onClick={() => setSelectedDifficulty('advanced')}
                   aria-pressed={selectedDifficulty === 'advanced'}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                  className={`px-6 py-3 rounded-lg font-bold transition-all border-2 ${
                     selectedDifficulty === 'advanced' 
-                      ? 'bg-red-500 text-white shadow-lg scale-105' 
-                      : 'bg-red-100 text-red-800 hover:bg-red-200'
+                      ? 'bg-red-500 text-white border-red-600 shadow-lg scale-105' 
+                      : 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100'
                   }`}
                 >
                   <span aria-hidden="true">🔥</span> Advanced
@@ -269,14 +270,14 @@ export default function LearnPage() {
 
             {/* Progress */}
             <div 
-              className="bg-yellow-50 rounded-lg shadow-lg p-4 mb-6 border-l-4 border-secondary"
+              className={`bg-white/80 rounded-lg p-6 mb-8 border-l-8 ${theme.colors.secondary} shadow-md`}
               role="status"
               aria-live="polite"
             >
-              <p className="text-lg">
+              <p className="text-xl font-medium">
                 <strong>Progress:</strong> {completedLessons.size} of {lessons.length} lessons completed
                 {completedLessons.size === lessons.length && (
-                  <span> <span aria-hidden="true">🎉</span> You're a baseball expert!</span>
+                  <span className="ml-2 block mt-2 text-emerald-700"> <span aria-hidden="true">🎉</span> You're a baseball expert!</span>
                 )}
               </p>
             </div>
@@ -289,50 +290,52 @@ export default function LearnPage() {
                   <li key={lesson.id}>
                     <button
                       onClick={() => setSelectedLesson(lesson)}
-                      className="w-full bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-all transform hover:scale-105 text-left"
+                      className={`w-full ${theme.colors.cardBg} backdrop-blur-sm rounded-lg p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 text-left border-2 ${theme.colors.cardBorder} h-full flex flex-col`}
                       aria-label={`${lesson.title} - ${lesson.difficulty} level${completedLessons.has(lesson.id) ? ', completed' : ''}`}
                     >
-                      <div className="flex items-start justify-between mb-3">
-                        <span className="text-5xl" aria-hidden="true">{lesson.emoji}</span>
+                      <div className="flex items-start justify-between mb-4">
+                        <span className="text-5xl filter drop-shadow-md" aria-hidden="true">{lesson.emoji}</span>
                         {completedLessons.has(lesson.id) && (
-                          <span className="text-2xl" aria-hidden="true">✅</span>
+                          <span className="text-3xl text-emerald-600" aria-hidden="true">✅</span>
                         )}
                       </div>
-                      <h3 className="text-xl font-bold mb-2">{lesson.title}</h3>
-                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-3 border ${getDifficultyColor(lesson.difficulty)}`}>
+                      <h3 className={`text-2xl font-bold mb-3 ${theme.styles.fontHeader}`}>{lesson.title}</h3>
+                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-bold mb-4 border uppercase tracking-wider ${getDifficultyColor(lesson.difficulty)}`}>
                         {lesson.difficulty}
                       </span>
-                      <p className="text-gray-700">{lesson.description}</p>
+                      <p className="text-lg opacity-80 leading-relaxed">{lesson.description}</p>
                     </button>
                   </li>
                 ))}
               </ul>
             </section>
 
-            {/* Peanuts Quote */}
-            <figure className="mt-8 bg-white rounded-lg shadow-lg p-6 text-center">
-              <blockquote className="text-xl italic text-gray-700">
-                "Learn from yesterday, live for today, look to tomorrow, rest this afternoon."
+            {/* Theme Quote */}
+            <figure className={`mt-12 ${theme.colors.cardBg} rounded-lg p-8 text-center border-2 ${theme.colors.cardBorder} max-w-2xl mx-auto transform rotate-1`}>
+              <blockquote className={`text-2xl italic mb-4 opacity-90 ${theme.styles.fontHeader}`}>
+                "{theme.content.footerQuote.text}"
               </blockquote>
-              <figcaption className="text-sm text-gray-600 mt-2">— Charlie Brown</figcaption>
+              <figcaption className="text-lg font-bold opacity-70">
+                — {theme.content.footerQuote.author}
+              </figcaption>
             </figure>
           </>
         ) : (
           /* Lesson Detail View */
-          <article className="bg-white rounded-lg shadow-xl p-8 max-w-4xl mx-auto">
+          <article className={`${theme.colors.cardBg} backdrop-blur-sm rounded-lg p-8 max-w-3xl mx-auto border-2 ${theme.colors.cardBorder} shadow-2xl`}>
             <button
               onClick={() => setSelectedLesson(null)}
-              className="text-blue-700 hover:text-blue-900 font-semibold mb-4 flex items-center gap-2"
+              className="text-blue-700 hover:text-blue-900 font-bold mb-6 flex items-center gap-2 text-lg group"
               aria-label="Back to all lessons"
             >
-              <span aria-hidden="true">←</span> Back to Lessons
+              <span aria-hidden="true" className="group-hover:-translate-x-1 transition-transform">←</span> Back to Lessons
             </button>
 
-            <header className="flex items-center gap-4 mb-6">
-              <span className="text-6xl" aria-hidden="true">{selectedLesson.emoji}</span>
+            <header className="flex items-center gap-6 mb-8 pb-8 border-b-2 border-current/10">
+              <span className="text-7xl filter drop-shadow-lg" aria-hidden="true">{selectedLesson.emoji}</span>
               <div>
-                <h2 className="text-3xl font-bold">{selectedLesson.title}</h2>
-                <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mt-2 border ${getDifficultyColor(selectedLesson.difficulty)}`}>
+                <h2 className={`text-4xl font-bold mb-2 ${theme.styles.fontHeader}`}>{selectedLesson.title}</h2>
+                <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-bold border uppercase tracking-wider ${getDifficultyColor(selectedLesson.difficulty)}`}>
                   {selectedLesson.difficulty}
                 </span>
               </div>
@@ -342,22 +345,22 @@ export default function LearnPage() {
               {selectedLesson.content.map((paragraph, index) => {
                 const parts = paragraph.split('**');
                 return (
-                  <p key={index} className="mb-4 text-lg leading-relaxed">
+                  <p key={index} className="mb-6 text-xl leading-relaxed opacity-90">
                     {parts.map((part, i) => 
-                      i % 2 === 1 ? <strong key={i} className="text-primary">{part}</strong> : part
+                      i % 2 === 1 ? <strong key={i} className="text-current font-bold bg-white/50 px-1 rounded">{part}</strong> : part
                     )}
                   </p>
                 );
               })}
             </div>
 
-            <div className="mt-8 pt-6 border-t-2 border-gray-200">
+            <div className="mt-12 pt-8 border-t-2 border-current/10">
               <button
                 onClick={() => {
                   handleCompleteLesson(selectedLesson.id);
                   setSelectedLesson(null);
                 }}
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-lg text-xl transition-all transform hover:scale-105 shadow-lg"
+                className={`w-full ${theme.colors.buttonPrimary} font-bold py-5 px-8 rounded-lg text-2xl transition-all transform hover:scale-[1.02] shadow-xl flex items-center justify-center gap-3`}
                 aria-label={completedLessons.has(selectedLesson.id) ? 'Lesson already completed, return to lessons' : 'Mark lesson as complete and return to lessons'}
               >
                 {completedLessons.has(selectedLesson.id) ? (
@@ -373,4 +376,3 @@ export default function LearnPage() {
     </div>
   );
 }
-

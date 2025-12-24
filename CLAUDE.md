@@ -1,4 +1,4 @@
-# Nutty_Baseball - AI Assistant Context
+# Sandlot_Wisdom - AI Assistant Context
 
 > **Purpose:** Technical context for AI coding assistants
 > - Development commands and paths

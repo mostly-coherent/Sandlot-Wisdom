@@ -1,89 +1,75 @@
-# ⚾ Nutty Baseball
+# 🧢 Sandlot Wisdom
 
-> *"Good grief! I need to learn baseball!"* — Every parent whose kid just joined Little League
+> **Your backyard companion for learning baseball alongside your kids.** Interactive lessons, game tracking, and timeless baseball wisdom for parents and players alike.
 
-**Your fun, Peanuts-themed companion for learning baseball alongside your kids.** Interactive lessons, game tracking, and Charlie Brown–approved commentary when you're losing to your 10-year-old in the backyard.
+![Type](https://img.shields.io/badge/Type-App-blue)
+![Status](https://img.shields.io/badge/Status-Active%20Dev-green)
+![Stack](https://img.shields.io/badge/Stack-Next.js%2015%20%7C%20TypeScript%20%7C%20Tailwind-blue)
 
----
-
-## 🚀 See It Running
-
-### Option A: Auto-Generate Server Scripts (Recommended)
-
-In Cursor Chat, type:
-
-```
-@Generate-server-scripts.md @nutty_baseball
-```
-
-This creates `start-servers.sh`, `stop-servers.sh`, and `check-servers.sh` for one-command startup.
-
-### Option B: Manual Quick Start
+## 🚀 Quick Start
 
 ```bash
+# 1. Install dependencies
 npm install
+
+# 2. Run locally (No API keys needed!)
 npm run dev
 ```
 
-Open **http://localhost:3000** in your browser.
-
-**No API keys needed!** Everything runs locally in your browser.
+**→ Open http://localhost:3000**
 
 ---
 
-## ✨ Features
+<details>
+<summary><strong>✨ Features</strong></summary>
 
-### 📚 Learn Baseball
-Interactive lessons from "What's an inning?" to "Actually, that was a balk":
-- **Beginner** — Positions, scoring, how not to embarrass yourself
-- **Intermediate** — Little League rules and umpire signals
-- **Advanced** — MLB strategy and stats
+- **📚 Learn Baseball:** Interactive lessons from "What's an inning?" to "Actually, that was a balk".
+- **⚾ Game Tracker:** Track backyard or Little League games with simplified or official rules.
+- **🧢 The Backyard Coach:** Real-time encouragement and wisdom ("Every rookie starts somewhere!").
+- **📖 Quick Reference:** Searchable rules for instant answers at the game.
+- **🌗 Dual Themes:** Includes a hidden "Private Mode" (try finding the secret gate!).
 
-### ⚾ Game Tracker
-Track backyard or Little League games with flexible rules:
-- **Backyard Mode** — Simplified rules for casual play
-- **Little League Mode** — Official youth baseball rules
-- **MLB Mode** — Full professional rules
-- Inning-by-inning scoring and game history
+</details>
 
-### 💬 Peanuts Commentary
-Real-time encouragement and gentle ribbing:
-- *"You're down by 5? Good grief! But Charlie Brown lost 999 games and never gave up!"*
-- *"Tied game! More suspenseful than waiting for the Great Pumpkin!"*
+<details>
+<summary><strong>⚙️ Environment Variables</strong></summary>
 
-### 📖 Quick Reference
-Searchable rules for instant answers at the game:
-- Position diagrams and strategy tips
-- "What happens on a foul ball?"
-- "What's the infield fly rule?"
+None! This app runs entirely client-side using Local Storage.
 
-## 🎮 How to Use
+</details>
 
-1. **New to Baseball?** → Start with **Learn** section
-2. **Ready to Play?** → Head to **Play** for game tracking
-3. **At a Game?** → Use **Reference** for quick rule lookups
-4. **Track Progress** → Check **History** for past games
+<details>
+<summary><strong>🛠️ Available Scripts</strong></summary>
 
-## 🎨 What Makes This Special
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run lint     # Check code quality
+npm test         # Run E2E tests
+```
 
-- **No login required** — Everything stored locally in your browser
-- **Works offline** — Perfect for the ballpark or backyard
-- **Peanuts theme** — Learning shouldn't feel like homework
-- **Parent-friendly** — Built by a parent learning alongside their kid
+</details>
+
+<details>
+<summary><strong>🚢 Deployment</strong></summary>
+
+Recommended: Deploy to Vercel
+
+1. Build locally and verify: `npm run build`
+2. Connect GitHub repo to Vercel
+3. Deploy (Zero config required)
+
+</details>
+
+<details>
+<summary><strong>📚 Development Notes</strong></summary>
+
+- See `CLAUDE.md` for detailed technical setup, architecture, and commands.
+- See `Plan.md` for product requirements and milestones.
+- Folder name remains `Sandlot-Wisdom` (formerly `nutty_baseball`).
+
+</details>
 
 ---
 
-## 💭 What I Learned
-
-My son's love for Peanuts comics inspired him to explore baseball, so the Peanuts theme wasn't just decoration—it reframed "I don't know baseball" from embarrassing to endearing. Adults relax when the UI winks at their confusion. Built with zero backend—local storage only—for zero friction.
-
-## 🔮 What's Next
-
-Working on **ambient listening for backyard games**—automatically tracking scores by listening to our natural conversation. Same audio recognition complexity as Allegro, but now filtering signal from noise in real-time.
-
----
-
-**Status:** Active Development  
-**Stack:** Next.js 15 · TypeScript · Tailwind · Local Storage (no backend)
-
-See `CLAUDE.md` for detailed technical setup and development commands.
+**Status:** Active Development | **Purpose:** Personal learning and portfolio project

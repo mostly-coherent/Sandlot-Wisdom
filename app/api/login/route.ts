@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       const response = NextResponse.json({ success: true });
       
       // Set auth cookie - expires in 30 days
-      response.cookies.set('nutty-baseball-auth', 'authenticated', {
+      response.cookies.set('sandlot-wisdom-auth', 'authenticated', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',

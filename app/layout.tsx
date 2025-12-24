@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./lib/themes";
+import ThemeWrapper from "./components/ThemeWrapper";
+import ThemeSwitcher from "./components/ThemeSwitcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,44 +22,37 @@ export const metadata: Metadata = {
       : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
   ),
   title: {
-    default: "Nutty Baseball - Learn & Play Baseball",
-    template: "%s | Nutty Baseball",
+    default: "Sandlot Wisdom - Learn & Play Baseball",
+    template: "%s | Sandlot Wisdom",
   },
-  description: "Interactive baseball learning and game tracking app for parents and kids. Learn rules, track scores, and have fun with a Peanuts-inspired baseball experience!",
-  keywords: ["baseball", "kids", "learning", "score tracker", "youth baseball", "baseball rules", "Peanuts", "Charlie Brown"],
+  description: "Interactive baseball learning and game tracking app for parents and kids. Learn rules, track scores, and find wisdom in the game.",
+  keywords: ["baseball", "kids", "learning", "score tracker", "youth baseball", "baseball rules", "backyard baseball"],
   authors: [{ name: "JMBeh" }],
   creator: "JMBeh",
   publisher: "JMBeh",
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-    siteName: "Nutty Baseball",
-    title: "Nutty Baseball - Learn & Play Baseball",
-    description: "Interactive baseball learning and game tracking app for parents and kids. Learn rules, track scores, and have fun!",
+    siteName: "Sandlot Wisdom",
+    title: "Sandlot Wisdom - Learn & Play Baseball",
+    description: "Interactive baseball learning and game tracking app for parents and kids. Learn rules, track scores, and find wisdom in the game.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Nutty Baseball - Learn & Play Baseball",
+        alt: "Sandlot Wisdom - Learn & Play Baseball",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nutty Baseball - Learn & Play Baseball",
+    title: "Sandlot Wisdom - Learn & Play Baseball",
     description: "Interactive baseball learning and game tracking app for parents and kids.",
     images: ["/og-image.png"],
   },
@@ -74,7 +70,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Nutty Baseball",
+    title: "Sandlot Wisdom",
   },
   formatDetection: {
     telephone: false,
@@ -83,8 +79,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#e85d04" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1410" },
+    { media: "(prefers-color-scheme: light)", color: "#047857" }, // Emerald 700
+    { media: "(prefers-color-scheme: dark)", color: "#064e3b" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -101,10 +97,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
-        {children}
+        <ThemeProvider>
+          <ThemeWrapper>
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
+            {children}
+            <ThemeSwitcher />
+          </ThemeWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

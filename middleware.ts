@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Check for auth cookie
-  const authCookie = request.cookies.get('nutty-baseball-auth');
+  const authCookie = request.cookies.get('sandlot-wisdom-auth');
   const isAuthenticated = authCookie?.value === 'authenticated';
 
   // If not authenticated and trying to access protected route

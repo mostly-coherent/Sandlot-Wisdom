@@ -16,8 +16,8 @@ export interface Game {
   winner?: string;
 }
 
-const GAMES_KEY = 'nutty-baseball-games';
-const CURRENT_GAME_KEY = 'nutty-baseball-current-game';
+const GAMES_KEY = 'sandlot-wisdom-games';
+const CURRENT_GAME_KEY = 'sandlot-wisdom-current-game';
 
 export const saveGame = (game: Game): void => {
   if (typeof window === 'undefined') return;

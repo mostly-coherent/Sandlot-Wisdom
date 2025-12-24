@@ -1,4 +1,4 @@
-# Nutty_Baseball - Plan
+# Sandlot_Wisdom - Plan
 
 > **Purpose:** Requirements, research, and planning document
 > - Problem statement and user needs
@@ -12,7 +12,7 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 **Target Users:**
 - Primary: Parents learning baseball to support their kids
 - Secondary: Kids (10+) learning baseball fundamentals
-- Context: Inspired by Peanuts/Charlie Brown baseball culture
+- Context: Inspired by backyard baseball culture and timeless baseball wisdom
 
 ## Goals
 - Create an engaging, interactive baseball learning experience for beginners
@@ -33,7 +33,7 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 - As a user, I want to customize game rules (innings, simplified scoring) so we can play age-appropriate backyard games
 - As a parent watching Little League, I want quick rule references so I can understand umpire calls and game situations
 - As a competitive dad, I want playful commentary when I'm losing so the app keeps things lighthearted
-- As a Peanuts fan, I want Charlie Brown/Snoopy themed elements so the app connects to my son's original interest
+- As a user, I want a nostalgic, encouraging theme that makes learning feel approachable and fun
 
 ## Feature Requirements
 
@@ -53,7 +53,7 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 - [ ] **Playful Commentary**: Context-aware fun responses
   - Encouraging messages when learning
   - Gentle teasing when parent is losing to kid
-  - Peanuts-themed references and quotes
+  - Sandlot wisdom and timeless baseball quotes
 - [ ] **Quick Reference**: Searchable rules and situations
   - "What happens if..." scenarios
   - Position diagrams
@@ -66,7 +66,7 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 - [ ] **Practice Drills**: Suggested backyard drills with instructions
 - [ ] **Little League Calendar**: Game schedule integration
 - [ ] **Photo Journal**: Add photos from games with notes
-- [ ] **Snoopy's Tips**: Daily baseball tips or trivia notifications
+- [ ] **Daily Tips**: Daily baseball tips or trivia notifications
 - [ ] **Multi-player Support**: Track more than 2 players/teams
 - [ ] **Export Stats**: Share game summaries via text/email
 
@@ -83,13 +83,14 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
   - Single codebase for all platforms
 
 ### UI/UX Theme
-- **Options Considered:** Realistic baseball aesthetic, Cartoon/playful, Peanuts-inspired
-- **Decision:** Peanuts-inspired with playful baseball elements
+- **Options Considered:** Realistic baseball aesthetic, Cartoon/playful, Backyard/Sandlot-inspired
+- **Decision:** Dual-theme system: Sandlot Wisdom (default) + Private Mode (Peanuts-inspired)
 - **Rationale:**
-  - Connects to son's original interest (Charlie Brown comics)
+  - Default "Sandlot Wisdom" theme captures nostalgic backyard baseball without copyright concerns
   - Makes learning less intimidating for beginners
   - Differentiates from serious sports apps
   - Appeals to both kids and nostalgic parents
+  - Private mode preserves original inspiration for personal use
 
 ### Data Storage
 - **Options Considered:** Cloud database (Supabase), Local storage only, Hybrid
@@ -177,7 +178,7 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 
 **Tasks:**
 - [ ] Context-aware commentary system
-- [ ] Peanuts-themed quotes and references
+- [ ] Sandlot wisdom quotes and references
 - [ ] Gentle teasing when parent losing
 - [ ] Quick reference search (rules, situations)
 - [ ] Position diagrams
@@ -187,7 +188,7 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 - Commentary feels natural and fun
 - Parents laugh at playful teasing
 - Quick reference is actually useful during games
-- Peanuts theme is charming
+- Theme captures nostalgic backyard baseball spirit
 
 ### Phase 4: Stats & Achievements (Week 6-7)
 **Goal:** Track progress and celebrate milestones
@@ -212,7 +213,7 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 **Tasks:**
 - [ ] Short video clips for complex rules
 - [ ] Practice drill video demonstrations
-- [ ] Daily baseball tips ("Snoopy's Tips")
+- [ ] Daily baseball tips
 - [ ] Little League calendar integration
 - [ ] Photo journal (add photos from games)
 - [ ] Multi-player game tracking

@@ -2,215 +2,58 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useTheme } from '../lib/themes';
 
-interface ReferenceItem {
-  id: string;
-  category: string;
-  question: string;
-  answer: string;
-  emoji: string;
-}
-
-const references: ReferenceItem[] = [
-  {
-    id: 'strike-zone',
-    category: 'Rules',
-    question: 'What is the strike zone?',
-    answer: 'The strike zone is the area over home plate between the batter\'s knees and the midpoint of their torso. If a pitch passes through this zone and the batter doesn\'t swing, it\'s called a strike.',
-    emoji: '🎯'
-  },
-  {
-    id: 'foul-ball',
-    category: 'Rules',
-    question: 'What happens on a foul ball?',
-    answer: 'A foul ball counts as a strike (except if the batter already has 2 strikes - then it doesn\'t count). The ball is dead and runners can\'t advance. If a foul ball is caught in the air, it\'s an out.',
-    emoji: '⚠️'
-  },
-  {
-    id: 'walk',
-    category: 'Rules',
-    question: 'What is a walk?',
-    answer: 'A walk (or "base on balls") happens when the pitcher throws 4 balls (pitches outside the strike zone). The batter gets to go to first base for free.',
-    emoji: '🚶'
-  },
-  {
-    id: 'force-out',
-    category: 'Rules',
-    question: 'What is a force out?',
-    answer: 'A force out happens when a runner MUST advance to the next base (because the batter hit the ball). The fielder only needs to touch the base with the ball before the runner arrives - they don\'t need to tag the runner.',
-    emoji: '⚡'
-  },
-  {
-    id: 'tag-out',
-    category: 'Rules',
-    question: 'What is a tag out?',
-    answer: 'When a runner is not forced to advance, they must be tagged with the ball (or glove holding the ball) while off the base to be out. This happens on stolen base attempts or when runners go back to a base.',
-    emoji: '👋'
-  },
-  {
-    id: 'infield-fly',
-    category: 'Rules',
-    question: 'What is the infield fly rule?',
-    answer: 'With runners on 1st & 2nd (or bases loaded) and less than 2 outs, if a batter hits an easy pop-up in the infield, the umpire calls "infield fly" and the batter is automatically out. This prevents the defense from dropping the ball on purpose to get a double play.',
-    emoji: '🎈'
-  },
-  {
-    id: 'balk',
-    category: 'Rules',
-    question: 'What is a balk?',
-    answer: 'A balk is an illegal motion by the pitcher that deceives the runners. Common balks: starting the pitching motion and stopping, faking a throw to first base, or not coming to a complete stop in the set position. When called, all runners advance one base.',
-    emoji: '🚫'
-  },
-  {
-    id: 'ground-rule-double',
-    category: 'Rules',
-    question: 'What is a ground rule double?',
-    answer: 'When a fair ball bounces over the outfield fence or gets stuck in the fence/ivy, the batter automatically gets a double and all runners advance 2 bases. It\'s called a "ground rule" because it\'s based on the specific ballpark\'s rules.',
-    emoji: '⚾'
-  },
-  {
-    id: 'positions-diagram',
-    category: 'Positions',
-    question: 'Where do players stand on the field?',
-    answer: 'Pitcher (P) - on the mound in center. Catcher (C) - behind home plate. Infielders: 1B (first base), 2B (between 1st & 2nd), SS (between 2nd & 3rd), 3B (third base). Outfielders: LF (left field), CF (center field), RF (right field).',
-    emoji: '🗺️'
-  },
-  {
-    id: 'pitcher-role',
-    category: 'Positions',
-    question: 'What does the pitcher do?',
-    answer: 'The pitcher throws the ball to the catcher, trying to get strikes or make the batter hit the ball weakly. They also field balls hit near them and cover first base on balls hit to the right side.',
-    emoji: '🎯'
-  },
-  {
-    id: 'catcher-role',
-    category: 'Positions',
-    question: 'What does the catcher do?',
-    answer: 'The catcher catches pitches, calls what pitch to throw, blocks wild pitches, throws out runners trying to steal, and fields bunts. They\'re like the quarterback of the defense!',
-    emoji: '🧤'
-  },
-  {
-    id: 'shortstop-role',
-    category: 'Positions',
-    question: 'Why is shortstop important?',
-    answer: 'The shortstop covers a lot of ground between 2nd and 3rd base and handles many ground balls. They need quick reflexes, a strong arm, and good instincts. Often the best athlete on the team plays shortstop.',
-    emoji: '⭐'
-  },
-  {
-    id: 'batting-order',
-    category: 'Strategy',
-    question: 'What is the batting order?',
-    answer: 'The batting order is the sequence in which players bat. It stays the same throughout the game. In Little League, all players usually bat even if they don\'t play in the field. In MLB, only the 9 players in the field bat (except in the American League with the DH).',
-    emoji: '📋'
-  },
-  {
-    id: 'sacrifice-bunt',
-    category: 'Strategy',
-    question: 'What is a sacrifice bunt?',
-    answer: 'A sacrifice bunt is when a batter intentionally taps the ball softly to advance a runner, knowing they\'ll likely be thrown out at first. It\'s called a "sacrifice" because the batter gives up their at-bat to help the team.',
-    emoji: '🎁'
-  },
-  {
-    id: 'stolen-base',
-    category: 'Strategy',
-    question: 'How do stolen bases work?',
-    answer: 'A runner can try to advance to the next base while the pitcher is throwing. They take off running and try to reach the base before the catcher throws them out. Fast runners with good timing can steal bases successfully.',
-    emoji: '💨'
-  },
-  {
-    id: 'double-play',
-    category: 'Strategy',
-    question: 'What is a double play?',
-    answer: 'A double play is when the defense gets 2 outs on one batted ball. The most common is a ground ball to the shortstop or second baseman, who throws to second base for one out, then to first base for the second out (6-4-3 or 4-6-3).',
-    emoji: '⚡⚡'
-  },
-  {
-    id: 'count-strategy',
-    category: 'Strategy',
-    question: 'How does the count affect strategy?',
-    answer: 'The count (balls-strikes) changes everything! 3-0: Pitcher must throw a strike, batter can be picky. 0-2: Batter is defensive, pitcher can throw anything. 3-2: Full count, runners go on the pitch, maximum tension!',
-    emoji: '🎲'
-  },
-  {
-    id: 'little-league-pitch-count',
-    category: 'Little League',
-    question: 'What are pitch count rules?',
-    answer: 'Little League has strict pitch count limits to protect young arms: 50 pitches for 7-8 year olds, 75 for 9-10, 85 for 11-12. Pitchers need rest days based on how many pitches they threw. This prevents arm injuries.',
-    emoji: '🛡️'
-  },
-  {
-    id: 'little-league-mercy',
-    category: 'Little League',
-    question: 'What is the mercy rule?',
-    answer: 'If one team is ahead by 10 or more runs after 4 innings (or 3.5 if the home team is ahead), the game ends. This keeps games from becoming too lopsided and keeps it fun for everyone.',
-    emoji: '🤝'
-  },
-  {
-    id: 'little-league-equipment',
-    category: 'Little League',
-    question: 'What equipment is required?',
-    answer: 'All batters and base runners must wear batting helmets. Catchers need full gear (helmet with face mask, chest protector, shin guards). Some leagues require face guards on helmets. Metal cleats are usually not allowed.',
-    emoji: '⛑️'
-  },
-  {
-    id: 'backyard-simplified',
-    category: 'Backyard',
-    question: 'How can we simplify rules for backyard games?',
-    answer: 'For backyard fun: Play fewer innings (3-5), allow unlimited foul balls, don\'t worry about balks or check swings, let everyone bat each inning, use a softer ball, adjust base distances, and focus on having fun rather than perfect rules!',
-    emoji: '🏡'
-  },
-  {
-    id: 'backyard-equipment',
-    category: 'Backyard',
-    question: 'What do we need for backyard baseball?',
-    answer: 'Minimum: a bat, a ball (tennis ball or soft baseball), and 4 bases (can use anything - bags, towels, frisbees). Optional: gloves, batting helmet, cones for foul lines. You can play with just 2 people or a whole group!',
-    emoji: '🎒'
-  },
-  {
-    id: 'encouragement',
-    category: 'Parent Tips',
-    question: 'How should I encourage my son?',
-    answer: 'Focus on effort and improvement, not results. Celebrate good plays by both teams. Don\'t criticize umpires. Ask "Did you have fun?" not "Did you win?" Be positive even after mistakes - baseball is a game of failure (even .300 hitters fail 70% of the time)!',
-    emoji: '❤️'
-  },
-  {
-    id: 'watching-games',
-    category: 'Parent Tips',
-    question: 'How can I enjoy watching Little League games?',
-    answer: 'Learn the basics (you\'re doing that now!), watch your son\'s position closely, notice improvement over time, chat with other parents, bring snacks, take photos, and remember - it\'s about the kids having fun and learning, not about winning.',
-    emoji: '📸'
-  }
+const terms = [
+  { term: 'Ace', def: 'The best pitcher on the team.' },
+  { term: 'Balk', def: 'An illegal motion by the pitcher with runners on base.' },
+  { term: 'Cleanup', def: 'The 4th batter in the lineup, usually a power hitter.' },
+  { term: 'Double Play', def: 'A defensive play that records two outs.' },
+  { term: 'ERA', def: 'Earned Run Average - runs allowed per 9 innings.' },
+  { term: 'Full Count', def: '3 balls and 2 strikes on the batter.' },
+  { term: 'Grand Slam', def: 'A home run with the bases loaded (4 runs).' },
+  { term: 'Hot Corner', def: 'Third base, because hard hits come fast.' },
+  { term: 'Infield Fly', def: 'A rule preventing easy double plays on pop-ups.' },
+  { term: 'Jack', def: 'Slang for a home run.' },
+  { term: 'Knuckleball', def: 'A pitch that floats and moves unpredictably.' },
+  { term: 'Lead', def: 'Distance a runner takes from a base before the pitch.' },
+  { term: 'Mendoza Line', def: 'A batting average of .200 (struggling).' },
+  { term: 'No-Hitter', def: 'A game where a team gets zero hits.' },
+  { term: 'On Deck', def: 'The next batter waiting to hit.' },
+  { term: 'Pickle', def: 'A rundown where a runner is trapped between bases.' },
+  { term: 'RBI', def: 'Run Batted In - credit for scoring a run.' },
+  { term: 'Southpaw', def: 'A left-handed pitcher.' },
+  { term: 'Triple Crown', def: 'Leading league in AVG, HR, and RBI.' },
+  { term: 'Utility Player', def: 'Someone who can play multiple positions.' },
+  { term: 'Walk-off', def: 'A hit that ends the game in the bottom of the last inning.' },
+  { term: 'Yard', def: 'The baseball field ("Going yard" = home run).' },
+  { term: 'Zip', def: 'Fast speed on a pitch.' }
 ];
 
 export default function ReferencePage() {
+  const { theme } = useTheme();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  const categories = ['all', ...Array.from(new Set(references.map(r => r.category)))];
-
-  const filteredReferences = references.filter(ref => {
-    const matchesSearch = ref.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         ref.answer.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || ref.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredTerms = terms.filter(item => 
+    item.term.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    item.def.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-200 via-grass/20 to-dirt/30">
+    <div className="min-h-screen pb-12">
       {/* Header */}
-      <header className="bg-primary text-white shadow-lg">
+      <header className={`${theme.colors.primary} text-white ${theme.styles.shadow} transition-colors duration-500`}>
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Link 
               href="/" 
-              className="text-2xl hover:text-secondary transition-colors"
+              className="text-2xl hover:opacity-80 transition-opacity font-bold"
               aria-label="Back to home page"
             >
               <span aria-hidden="true">←</span> Back
             </Link>
-            <h1 className="text-4xl font-bold">
-              <span aria-hidden="true">📖</span> Quick Reference
+            <h1 className={`text-4xl font-bold flex items-center gap-3 ${theme.styles.fontHeader}`}>
+              <span aria-hidden="true">📖</span> Rule Book
             </h1>
             <div className="w-24" aria-hidden="true"></div>
           </div>
@@ -218,121 +61,94 @@ export default function ReferencePage() {
       </header>
 
       <main id="main-content" className="container mx-auto px-4 py-8" tabIndex={-1}>
-        {/* Search Bar */}
-        <section aria-label="Search" className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <label htmlFor="reference-search" className="sr-only">
-            Search for rules, positions, or situations
-          </label>
-          <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl" aria-hidden="true">🔍</span>
-            <input
-              id="reference-search"
-              type="search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search for rules, positions, or situations..."
-              className="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none text-lg"
-              aria-describedby="search-results-status"
-            />
-          </div>
-        </section>
-
-        {/* Category Filter */}
-        <section aria-labelledby="category-heading" className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 id="category-heading" className="text-xl font-bold mb-4">Filter by Category:</h2>
-          <div className="flex flex-wrap gap-3" role="group" aria-label="Category filter buttons">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                aria-pressed={selectedCategory === cat}
-                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-primary text-white shadow-lg scale-105'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+        {/* Field Diagram Card */}
+        <section aria-labelledby="field-heading" className={`${theme.colors.cardBg} backdrop-blur-sm rounded-lg shadow-lg p-8 mb-12 border-2 ${theme.colors.cardBorder} max-w-4xl mx-auto`}>
+          <h2 id="field-heading" className={`text-3xl font-bold mb-8 text-center ${theme.styles.fontHeader}`}>Field Positions</h2>
+          
+          <div className="relative aspect-[4/3] bg-emerald-600 rounded-lg overflow-hidden border-4 border-white/20 shadow-inner">
+            {/* Field Markings */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(194,178,128,0.4)_0%,rgba(194,178,128,0.4)_25%,transparent_25%)]"></div>
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48 h-48 border-2 border-white/50 rotate-45"></div>
+            
+            {/* Position Markers */}
+            {[
+              { id: 'P', name: 'Pitcher', top: '65%', left: '50%' },
+              { id: 'C', name: 'Catcher', top: '90%', left: '50%' },
+              { id: '1B', name: 'First Base', top: '60%', left: '70%' },
+              { id: '2B', name: 'Second Base', top: '45%', left: '60%' },
+              { id: '3B', name: 'Third Base', top: '60%', left: '30%' },
+              { id: 'SS', name: 'Shortstop', top: '45%', left: '40%' },
+              { id: 'LF', name: 'Left Field', top: '25%', left: '20%' },
+              { id: 'CF', name: 'Center Field', top: '15%', left: '50%' },
+              { id: 'RF', name: 'Right Field', top: '25%', left: '80%' },
+            ].map(pos => (
+              <div 
+                key={pos.id}
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-help"
+                style={{ top: pos.top, left: pos.left }}
+                aria-label={pos.name}
               >
-                {cat === 'all' ? 'All' : cat}
-              </button>
+                <div className={`w-10 h-10 ${theme.colors.cardBg} rounded-full flex items-center justify-center font-bold border-2 ${theme.colors.cardBorder} shadow-lg group-hover:scale-125 transition-transform text-black`}>
+                  {pos.id}
+                </div>
+                <span className="text-white text-xs font-bold mt-1 bg-black/50 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  {pos.name}
+                </span>
+              </div>
             ))}
           </div>
         </section>
 
-        {/* Results status for screen readers */}
-        <div id="search-results-status" className="sr-only" role="status" aria-live="polite">
-          {filteredReferences.length === 0 
-            ? 'No results found' 
-            : `${filteredReferences.length} ${filteredReferences.length === 1 ? 'result' : 'results'} found`
-          }
-        </div>
+        {/* Glossary */}
+        <section aria-labelledby="glossary-heading" className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+            <h2 id="glossary-heading" className={`text-3xl font-bold ${theme.styles.fontHeader}`}>Baseball Glossary</h2>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl opacity-50" aria-hidden="true">🔍</span>
+              <input
+                type="search"
+                placeholder="Search terms..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={`pl-12 pr-6 py-3 rounded-lg border-2 ${theme.colors.cardBorder} w-full md:w-80 focus:ring-4 focus:ring-current/20 focus:outline-none text-lg bg-white/80`}
+                aria-label="Search glossary terms"
+              />
+            </div>
+          </div>
 
-        {/* Reference Items */}
-        <section aria-label="Reference items">
-          <h2 className="sr-only">Reference Questions</h2>
-          <div className="space-y-4">
-            {filteredReferences.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-lg p-8 text-center" role="alert">
-                <p className="text-xl text-gray-700">
-                  No results found. Try a different search term or category!
-                </p>
-              </div>
-            ) : (
-              filteredReferences.map(ref => (
-                <article
-                  key={ref.id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden transition-all hover:shadow-xl"
+          <div className="grid md:grid-cols-2 gap-6">
+            {filteredTerms.length > 0 ? (
+              filteredTerms.map((item, i) => (
+                <div 
+                  key={i}
+                  className={`${theme.colors.cardBg} backdrop-blur-sm rounded-lg p-6 border-l-4 ${theme.colors.secondary} shadow-md hover:shadow-lg transition-shadow`}
                 >
-                  <h3>
-                    <button
-                      onClick={() => setExpandedId(expandedId === ref.id ? null : ref.id)}
-                      className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-                      aria-expanded={expandedId === ref.id}
-                      aria-controls={`answer-${ref.id}`}
-                    >
-                      <div className="flex items-center gap-4 flex-1">
-                        <span className="text-4xl" aria-hidden="true">{ref.emoji}</span>
-                        <div>
-                          <div className="text-sm text-gray-600 font-semibold mb-1">
-                            {ref.category}
-                          </div>
-                          <div className="text-xl font-bold text-gray-900">
-                            {ref.question}
-                          </div>
-                        </div>
-                      </div>
-                      <span className="text-2xl text-gray-500" aria-hidden="true">
-                        {expandedId === ref.id ? '▼' : '▶'}
-                      </span>
-                    </button>
-                  </h3>
-                  
-                  <div 
-                    id={`answer-${ref.id}`}
-                    className={`px-6 pb-6 pt-2 bg-gray-50 border-t border-gray-200 ${expandedId === ref.id ? '' : 'hidden'}`}
-                    role="region"
-                    aria-labelledby={`question-${ref.id}`}
-                  >
-                    <p className="text-lg text-gray-700 leading-relaxed">
-                      {ref.answer}
-                    </p>
-                  </div>
-                </article>
+                  <dt className="text-xl font-bold mb-2 flex items-center gap-2">
+                    {item.term}
+                  </dt>
+                  <dd className="text-lg opacity-80 leading-relaxed">
+                    {item.def}
+                  </dd>
+                </div>
               ))
+            ) : (
+              <div className="col-span-2 text-center py-12 opacity-70 text-xl italic">
+                No terms found matching "{searchTerm}"
+              </div>
             )}
           </div>
         </section>
 
-        {/* Peanuts Quote */}
-        <figure className="mt-8 bg-white rounded-lg shadow-lg p-6 text-center">
-          <blockquote className="text-xl italic text-gray-700">
-            "I think I've discovered the secret of life - you just hang around until you get used to it."
+        {/* Footer Quote */}
+        <figure className={`mt-16 text-center max-w-2xl mx-auto ${theme.colors.cardBg} p-8 rounded-lg border-2 ${theme.colors.cardBorder} transform -rotate-1 shadow-lg`}>
+          <blockquote className={`text-2xl italic mb-4 opacity-90 ${theme.styles.fontHeader}`}>
+            "{theme.content.footerQuote.text}"
           </blockquote>
-          <figcaption className="text-sm text-gray-600 mt-2">
-            — Snoopy (Same goes for baseball rules! <span aria-hidden="true">🐕</span>)
+          <figcaption className="text-lg font-bold opacity-70 flex items-center justify-center gap-2">
+            — {theme.content.footerQuote.author} <span aria-hidden="true">{theme.content.mascotEmoji}</span>
           </figcaption>
         </figure>
       </main>
     </div>
   );
 }
-
