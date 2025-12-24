@@ -115,6 +115,114 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 - Positive feedback on playful commentary (makes learning fun)
 - Parent and child both engage with the app together
 
+## Implementation Phases
+
+### Phase 1: Ambient Listening for Game Tracking (Next - Priority)
+**Goal:** Track backyard game scores from natural conversation
+
+**The Challenge:** Filtering signal from noise when "that's a strike!" gets mixed with regular chatter. Unlike formal voice commands, backyard games have overlapping voices, excitement, disputes, and casual commentary.
+
+**Tasks:**
+- [ ] Research speech-to-text APIs with real-time streaming (Whisper, Deepgram, AssemblyAI)
+- [ ] Build intent classifier: game events vs. casual conversation
+- [ ] Handle ambiguity: "was that a strike?" vs. "that's a strike!"
+- [ ] Multi-speaker detection (parent vs. kid voices)
+- [ ] Confidence threshold for auto-logging vs. confirmation prompts
+- [ ] "Undo last score" voice command for disputes
+- [ ] Background listening mode with battery optimization
+- [ ] Test in real backyard conditions (wind, distance, excitement levels)
+
+**Success Criteria:**
+- 80%+ accuracy distinguishing game events from chatter
+- Works in noisy outdoor conditions
+- No manual button presses during gameplay
+- Natural dispute resolution ("wait, that wasn't a strike")
+
+### Phase 2: Learning Module (Week 3-4)
+**Goal:** Interactive baseball basics for beginners
+
+**Tasks:**
+- [ ] Create topic-based lesson structure (positions, rules, terminology)
+- [ ] Three difficulty levels (beginner, intermediate, advanced)
+- [ ] Interactive quizzes after each module
+- [ ] Visual diagrams for positions and field layout
+- [ ] Common scenarios and umpire calls
+- [ ] Store learning progress in localStorage
+
+**Success Criteria:**
+- Parent can navigate self-paced lessons
+- Quizzes reinforce learning
+- Progress tracked across sessions
+- Clear visual aids for complex concepts
+
+### Phase 2: Game Setup & Score Tracker (Week 3-4)
+**Goal:** Track backyard and Little League games
+
+**Tasks:**
+- [ ] Game setup wizard (innings, rules, players)
+- [ ] Inning-by-inning score entry
+- [ ] Current score display with animations
+- [ ] Game history archive
+- [ ] Support simplified backyard rules
+- [ ] Support official Little League rules
+
+**Success Criteria:**
+- Easy to start a new game
+- Simple score entry during play
+- Game history persists
+- Works for both backyard and official games
+
+### Phase 3: Playful Commentary & Quick Reference (Week 5)
+**Goal:** Fun engagement and rule lookups
+
+**Tasks:**
+- [ ] Context-aware commentary system
+- [ ] Peanuts-themed quotes and references
+- [ ] Gentle teasing when parent losing
+- [ ] Quick reference search (rules, situations)
+- [ ] Position diagrams
+- [ ] "What happens if..." scenarios
+
+**Success Criteria:**
+- Commentary feels natural and fun
+- Parents laugh at playful teasing
+- Quick reference is actually useful during games
+- Peanuts theme is charming
+
+### Phase 4: Stats & Achievements (Week 6-7)
+**Goal:** Track progress and celebrate milestones
+
+**Tasks:**
+- [ ] Player stats over multiple games
+- [ ] Achievement badges (learning milestones, games played)
+- [ ] Best game highlights
+- [ ] Win/loss records
+- [ ] Practice drill suggestions
+- [ ] Share game summaries
+
+**Success Criteria:**
+- Stats motivate continued play
+- Achievements feel rewarding
+- Easy to share accomplishments
+- Drills improve skills
+
+### Phase 5: Enhanced Content (Week 8-9)
+**Goal:** Richer learning materials
+
+**Tasks:**
+- [ ] Short video clips for complex rules
+- [ ] Practice drill video demonstrations
+- [ ] Daily baseball tips ("Snoopy's Tips")
+- [ ] Little League calendar integration
+- [ ] Photo journal (add photos from games)
+- [ ] Multi-player game tracking
+
+**Success Criteria:**
+- Videos clarify confusing rules
+- Drills are easy to follow
+- Calendar keeps games organized
+- Photos preserve memories
+
 ## Open Questions
 - [ ] Should we include pitch counting for Little League safety rules?
 - [ ] How detailed should position-specific learning be (e.g., catcher signals)?
@@ -124,4 +232,4 @@ A parent with minimal baseball knowledge needs an interactive, educational app t
 
 ---
 
-**Last Updated:** 2025-12-10
+**Last Updated:** 2025-12-22
