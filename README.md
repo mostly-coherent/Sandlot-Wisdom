@@ -67,7 +67,7 @@ Recommended: Deploy to Vercel
 <summary><strong>📚 Development Notes</strong></summary>
 
 - See `CLAUDE.md` for detailed technical setup, architecture, and commands.
-- See `Plan.md` for product requirements and milestones.
+- See `PLAN.md` for product requirements and milestones.
 - Folder name remains `Sandlot-Wisdom` (formerly `nutty_baseball`).
 
 </details>
