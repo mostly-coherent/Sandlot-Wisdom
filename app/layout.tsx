@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "./lib/themes";
 import ThemeWrapper from "./components/ThemeWrapper";
 import ThemeSwitcher from "./components/ThemeSwitcher";
+import { SessionGuard } from "./components/SessionGuard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -102,6 +103,7 @@ export default function RootLayout({
             <a href="#main-content" className="skip-link">
               Skip to main content
             </a>
+            <SessionGuard />
             {children}
             <ThemeSwitcher />
           </ThemeWrapper>

@@ -16,12 +16,12 @@ export async function POST(request: NextRequest) {
     if (password === correctPassword) {
       const response = NextResponse.json({ success: true });
       
-      // Set auth cookie - expires in 30 days
+      // Set auth cookie (2-day rolling session)
       response.cookies.set('sandlot-wisdom-auth', 'authenticated', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        maxAge: 60 * 60 * 24 * 30, // 30 days
+        maxAge: 60 * 60 * 24 * 2, // 2 days
         path: '/',
       });
 
