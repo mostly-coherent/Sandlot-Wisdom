@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useTheme } from './lib/themes';
-import LogoutButton from './components/LogoutButton';
+// LogoutButton removed — sign-out is now in SessionGuard (consistent across all apps)
 
 export default function Home() {
   const { theme } = useTheme();
@@ -21,17 +21,15 @@ export default function Home() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex-1"></div>
             <div className="flex-1 flex justify-center">
-              <h1 className={`text-5xl text-center flex items-center justify-center gap-4 ${theme.styles.fontHeader}`}>
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl text-center flex items-center justify-center gap-2 sm:gap-4 ${theme.styles.fontHeader}`}>
                 <span className="animate-bounce-ball" aria-hidden="true">{theme.content.mascotEmoji}</span>
                 {theme.content.title}
                 <span className="animate-bounce-ball" aria-hidden="true">{theme.content.mascotEmoji}</span>
               </h1>
             </div>
-            <div className="flex-1 flex justify-end">
-              <LogoutButton />
-            </div>
+            <div className="flex-1" />
           </div>
-          <p className="text-center mt-3 text-xl opacity-90 font-medium">
+          <p className="text-center mt-3 text-base sm:text-xl opacity-90 font-medium">
             {theme.content.subtitle}
           </p>
         </div>
